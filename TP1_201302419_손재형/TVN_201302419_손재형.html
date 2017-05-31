@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+
+	<title>TVN의 모든것!</title>
+	<!-- CSS, JS External 정의 -->
+	<link rel="stylesheet" type="text/css" href="./css/TermProject.css">
+
+	<!-- Introduce부분 Chart를 그리기 위해 http://www.chartjs.org/ 에서 가져온 js -->
+	<script type="text/javascript" src="./js/Chart.js"></script>
+	<!-- 이미지 슬라이드를 구현한 js -->
+	<script type="text/javascript" src="./js/img_slide.js"></script>
+	<!-- 메뉴바 부분의 버튼을 눌렀을시, 해당 위치로 이동을 구현한 js -->
+	<script type="text/javascript" src="./js/menu_scroll.js"></script>
+	<!-- 게스트북기능을 구현한 js -->
+	<script type="text/javascript" src="./js/Guestbook.js"></script>
+	<!-- 메뉴바에서 dropdown버튼 애니매이션기능 및 메뉴바 부분을 구현한 js -->
+	<script type="text/javascript" src="./js/MenuBar.js"></script>
+	<!-- 갤러리부분을 구현한 js -->
+	<script type="text/javascript" src="./js/Gallery.js"></script>
+	<!-- OpenGraph프로토콜을 구현한 js -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script type="text/javascript" src="./js/OpenGraph.js"></script>
+</head>
+
+<!-- 브라우저의 사이즈가 변경될때마다 window_size_change()함수를 실행, body부분이 모두 로드가 된 후에 기본적으로 수행해야할 javascript들을 실행하기위한 onload  -->
+
+<body onresize="window_size_change();Menu_bar_size();" onload="init_imgslide();init_Chart();init_Gallery();init_dropdown();">
+	<!-- 레이아웃은 HTML5 엘리먼트를 사용할 것 -->
+	<header>
+		<!-- Header (Menu bar) -->
+		<div id = "bar_space">
+			<!-- 메뉴바를 fixed해놓으면 공간을 차지하지 않는데, 이때 빈공간의 크기를 지정해주어 이미지슬라이드가 짤리지 않도록 설정해준다. -->
+		</div>
+		<div class="Bar" id="Bar">
+			<button class="Menu" onclick="home()">HOME</button>
+			<button class="Menu" onclick="Imgslide()">IMAGE SLIDE</button>
+			<button class="Menu" onclick="Introduce()">INTRODUCE</button>
+			<button class="Menu" onclick="Gallery()">GALLERY</button>
+			<button class="Menu" onclick="Guestbook()">GUEST BOOK</button>
+
+			<!-- dropdown리스트를 구현한 부분 (w3schools.com)참고 -->
+			<div class="container" onclick="click_dropdown(this)">
+				<div class="bar1"></div>
+				<div class="bar2"></div>
+				<!-- bar1,2,3은 container내의 흰색줄을 의미-->
+				<div class="bar3"></div>
+				<!-- dropdown리스크가 열렸을때 보여질 리스트들 -->
+				<div id="dropdownlist">
+					<ul>
+						<li onclick="home()">HOME</li>
+						<li onclick="Imgslide()">IMAGE SLIDE</li>
+						<li onclick="Introduce()">INTRODUCE</li>
+						<li onclick="Gallery()">GALLERY</li>
+						<li onclick="Guestbook()">GUEST BOOK</li>
+					</ul>
+				</div>
+			</div>
+
+		</div>
+	</header>
+
+	<!-- 메뉴바 부분 끝 -->
+	<main>
+		<!-- 이미지 슬라이드 부분 설명
+	이미지 슬라이드 부분에서 이미지를 추가하거나 삭제하여도 그에 맞춰서 이미지 하단의 이미지 버튼이 이미지의 갯수에따라 만들어지도록 구성-->
+		<div class="ImageSlide" id="div_image">
+			<img class="slide_img" src="./img/main_img/GongJo.PNG" alt="공조">
+			<img class="slide_img" src="./img/main_img/Baekjjongwon.PNG" alt="출장백종원">
+			<img class="slide_img" src="./img/main_img/secret.PNG" alt="비밀의숲">
+			<img class="slide_img" src="./img/main_img/She_lie.PNG" alt="그녀는거짓말을사랑해">
+			<img class="slide_img" src="./img/main_img/SNL9.PNG" alt="SNL9">
+			<img class="slide_img" src="./img/main_img/Society.PNG" alt="소사이어티게임">
+
+			<!-- 이미지는 이미지 슬라이드 부분의 width와 height를 100%모두 차지하고, 이미지와 겹치도록 공간을 50%씩 나누어 left 와 right버튼을 50%위치에 배치
+이미지 하단의 이미지버튼의 위치도 하단의 50%의 공간을 나누어서 배치, 좌,우 버튼은 따로 제작후 사용
+브라우저의 크기를 바꾸어도, 비율은 일치하도록, 즉 반응형으로 제작-->
+			<div id="img_slide_space"></div>
+			<img src="./img/slide_button/left.png" onclick=left_Move() alt="right_imgslide_button" id="left_img_button">
+			<img src="./img/slide_button/right.png" onclick=right_Move() alt="right_imgslide_button" id="right_img_button">
+
+			<div id="img_slide_space">
+				<div id="img_button_space"></div>
+				<div id="div_img_button">
+					<ui id="img_button"></ui>
+				</div>
+			</div>
+		</div>
+		<!-- 이미지 슬라이드 부분 끝 -->
+
+		<!-- Introduce부분 설명
+	Introduce부분은 Table로 만들어졌으며, thead부분에는 제목이,
+tbody부분에는 이미지, 차트, 내용이 들어가 있으며, 요구사항을 모두 넣음
+tfoot부분은 요구사항이 따로 없어서 간단하게 구성-->
+		<div class="Introduce" id="Introduce">
+			<table>
+				<thead>
+					<tr>
+						<th colspan="3">
+							<h1>Content trend leader <span class="TVN">TVN</span></h1></th>
+						<!--Heading Tag사용-->
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td id="Introduce_img">
+							<img src="./img/main_img/TVN_Logo.PNG" alt="TVN로고">
+							<br><br>
+							<img src="./img/main_img/TVN_Intro.PNG" alt="TVN이념">
+						</td>
+						<td>
+							<!-- Chart.js를 이용한 케이블 시청률 차트 제작 -->
+							<div id="div_chart"><canvas id="myChart"></canvas></div>
+						</td>
+						<td id="Introduce_content">
+							<!-- 글로 설명부분,으로 Font, color, size, underline을 요구사항에따라 변경하였음 -->
+							<span class="TVN">tvN</span>은 2006년 10월 09일 개국 이래, <span class="introduce_css">대한민국은 물론 미국 및 아시아</span>에서 방영되고 있는 대한민국 최고의 종합 엔터테인먼트 채널입니다. 늘 참신한 발상으로 재미있고 유쾌한 오리지널 콘텐츠를 기획하며, 전 연령대 시청자들로부터 깊은 공감과 열광적인 사랑을 받고 있습니다. 두려워하지 않는 모험심을 바탕으로 "세상에 없던 즐거움"을
+							끝 없이 추구합니다. <br>좌측 그래프는 인기 케이블채널 3사의 요일별 최대 시청율을 표시한 것입니다. 케이블 채널중 시청률 1위를 기록하고 있습니다.</td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="3"><strong>자료 : TVN</strong></td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+		<!-- introduce 부분 끝 -->
+		<!-- gallery 부분 설명
+갤러리 부분은 html에서 div안에 img만 넣어주면 작동하도록 구성
+이미지 왼쪽 상단의 x버튼을 삭제할시 local storage에 삭제된 것을 기록하고,
+다음에 해당 웹페이지를 실행해도 삭제한 이미지는 뜨지않도록 구성
+브라우저의 크기에따라 width축에 띄울 수 있는 최대의 갯수를 띄우도록 구성되어있음
+이미지를 클릭할 시 모달창이 뜨도록 되어있음 모달창에서는 x버튼으로 삭제한 이미지는
+표시되지 않도록 되어있음
+ -->
+		<div class="Gallery" id=Gallery>
+			<div class="Gallery_img_div"><img class="Gallery_img" src="./img/gallery_img/그녀는거짓말을사랑해.png" alt="그거너사"></img>
+			</div>
+			<div class="Gallery_img_div"><img class="Gallery_img" src="./img/gallery_img/나인.png" alt="나인"></div>
+			<div class="Gallery_img_div"><img class="Gallery_img" src="./img/gallery_img/내일그대와.png" alt="내일그대와"></div>
+			<div class="Gallery_img_div"><img class="Gallery_img" src="./img/gallery_img/너의목소리가보여.png" alt="너목보"></div>
+			<div class="Gallery_img_div"><img class="Gallery_img" src="./img/gallery_img/또오해영.png" alt="또오해영"></div>
+			<div class="Gallery_img_div"><img class="Gallery_img" src="./img/gallery_img/로맨스가필요해시즌1.png" alt="로필1기"></div>
+			<div class="Gallery_img_div"><img class="Gallery_img" src="./img/gallery_img/로맨스가필요해시즌2.png" alt="로필2기"></div>
+			<div class="Gallery_img_div"><img class="Gallery_img" src="./img/gallery_img/로맨스가필요해시즌3.png" alt="로필3기"></div>
+			<div class="Gallery_img_div"><img class="Gallery_img" src="./img/gallery_img/미생.png" alt="미 생"></div>
+			<div class="Gallery_img_div"><img class="Gallery_img" src="./img/gallery_img/시그널.png" alt="시그널"></div>
+			<div class="Gallery_img_div"><img class="Gallery_img" src="./img/gallery_img/시카고타자기.png" alt="시카고타자기"></div>
+			<div class="Gallery_img_div"><img class="Gallery_img" src="./img/gallery_img/싸우자귀신아.png" alt="싸우자귀신아"></div>
+			<div class="Gallery_img_div"><img class="Gallery_img" src="./img/gallery_img/아홉수소년.png" alt="아홉수소년"></div>
+			<div class="Gallery_img_div"><img class="Gallery_img" src="./img/gallery_img/응답하라1988.png" alt="응답하라88"></div>
+			<div class="Gallery_img_div"><img class="Gallery_img" src="./img/gallery_img/응답하라1994.png" alt="응답하라94"></div>
+			<div class="Gallery_img_div"><img class="Gallery_img" src="./img/gallery_img/집밥백선생.png" alt="집밥백선생"></div>
+			<div class="Gallery_img_div"><img class="Gallery_img" src="./img/gallery_img/치즈인더트랩.png" alt="치즈인더트랩"></div>
+			<div class="Gallery_img_div"><img class="Gallery_img" src="./img/gallery_img/피리부는사나이.png" alt="피리사나이"></div>
+			<div class="Gallery_img_div"><img class="Gallery_img" src="./img/gallery_img/도깨비.png" alt="도깨비"></div>
+			<!-- 모달 부분 설명
+		모달창은 position을 fixed로 지정해주어 브라우저의 위에 뜨도록 하였으며,
+	width와 height를 100%로 지정해주어 반투명한 화면을 구성하였음
+	반투명한 화면위에 이미지를 띄워주고, 좌측 우측 버튼을 배치
+	브라우저의 크기에 상관없이 Responsive하게 구성-->
+			<div id="modal_background"></div>
+			<div id="modal" onclick="modal_close()">
+				<img id="modal_img" src="" alt="">
+			</div>
+			<img id="modal_left_button" class="modal_button" src="./img/modal_button/left.PNG" alt="" onclick="modal_left_click()">
+			<img id="modal_right_button" class="modal_button" src="./img/modal_button/right.PNG" alt="" onclick="modal_right_click()">
+		</div>
+		<!-- 모달 부분 끝 -->
+		</div>
+		<!-- Gallery 부분 끝 -->
+
+		<!-- GuestBook 부분 설명
+		Guestbook부분은 Table로 구성
+		사용자로부터 작성자명, 내용을 입력받아서 해당 내용을
+		appendChild함수를 통해 테이블에 추가되도록 구성되어있음
+	-->
+		<div class="Guestbook" id="Guestbook">
+
+			<table id=GuestBook_table>
+				<thead>
+					<tr>
+						<td colspan="2">
+							<h2>방 명 록</h2></td>
+					</tr>
+				</thead>
+				<tbody id="GuestBook_content">
+
+				</tbody>
+			</table>
+
+			<table id="Guest_writer">
+				<tr>
+					<td class="gray_color">작성자</td>
+					<td><input class=input_text id="writer_name" type="text"></td>
+				</tr>
+				<tr>
+					<td class="gray_color">내 용</td>
+					<td><input class=input_text id="writer_content" type="text"></td>
+				</tr>
+				<tr>
+					<td colspan="2"><input type="submit" value="등록하기" onclick="Guestbook_write()"></td>
+				</tr>
+			</table>
+		</div>
+		<!-- GuestBook 부분 끝 -->
+	</main>
+	<!-- footer부분 시작
+요구사항에 맞도록 소속, 학번, 이름, E-mail을 기제하였고,
+소속, 학번은 color 및 decoration 으로 강조하였음-->
+	<footer>
+		<div><br>
+			<p><span id="univercity">Chungnam National University,</span>
+				<span id="student_ID">201302419,</span> 손재형, add3217@naver.com</p>
+			<br>
+		</div>
+	</footer>
+</body>
+
+</html>

@@ -1,0 +1,458 @@
+@CHARSET "UTF-8";
+
+/* Menu bar Start */
+
+div.Bar {
+  overflow: hidden;
+  background-color: #000000;
+  position: fixed;
+  top :0px;
+  left :0px;
+  padding: 0px;
+  width: 100%;
+  z-index: 1;
+}
+#bar_space{
+  width: 100%;
+}
+
+div.Bar button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+  color: #FFFFFF;
+}
+
+div.Bar button:hover {
+  /*마우스를 메뉴바에 올렸을경우*/
+  background: #474747;
+  cursor: pointer;
+}
+
+div.Bar div.container:hover {
+  background: #474747;
+  cursor: pointer;
+}
+
+
+/*dropdownlist 부분 시작*/
+
+.container {
+  display: inline-block;
+  cursor: pointer;
+  float: left;
+  border: none;
+  outline: none;
+  padding: 4px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+  color: #FFFFFF;
+}
+
+.bar1, .bar2, .bar3 {
+  width: 35px;
+  height: 5px;
+  background-color: #FFFFFF;
+  margin: 6px 0;
+  transition: 0.4s;
+}
+
+.change .bar1 {
+  -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+  transform: rotate(-45deg) translate(-9px, 6px);
+}
+
+.change .bar2 {
+  opacity: 0;
+}
+
+.change .bar3 {
+  -webkit-transform: rotate(45deg) translate(-8px, -8px);
+  transform: rotate(45deg) translate(-8px, -8px);
+}
+
+#dropdownlist {
+  /*display: none;*/
+  text-align: left;
+  color: white;
+  width: 100%;
+  display: none;
+  overflow: hidden;
+  height: 0;
+}
+
+#dropdownlist ul li {
+  cursor: pointer;
+}
+
+
+/*dropdownlist 부분 종료*/
+
+
+/* Menu bar End */
+
+
+/* Main Start */
+
+body {
+  margin: 0px;
+  overflow-x: hidden;
+  background-color: #EAEAEA;
+}
+
+
+/* 이미지 슬라이드 부분 css 시작*/
+
+div.ImageSlide {
+  outline: none;
+  width: 100%;
+  height: 384px;
+  overflow: hidden;
+}
+
+div.ImageSlide .slide_img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  overflow: hidden;
+  visibility: hidden;
+}
+
+#img_slide_space {
+  width: 100%;
+  height: 50%;
+  display: block;
+}
+
+#img_button_space {
+  width: 100%;
+  height: 70%;
+}
+
+div.ImageSlide #right_img_button {
+  position: relative;
+  width: 5%;
+  float: right;
+  margin-right: 5%;
+  margin-top: -2.5%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  top: 0px;
+  display: inline;
+}
+
+div.ImageSlide #left_img_button {
+  position: relative;
+  float: left;
+  margin-left: 5%;
+  margin-top: -2.5%;
+  width: 5%;
+  border: none;
+  background: none;
+  cursor: pointer;
+  top: 0px;
+  display: inline;
+}
+
+#div_img_button {
+  position: relative;
+  width: 100%;
+  text-align: center;
+}
+
+#img_button {
+  clear: both;
+  position: relative;
+  display: inline-block;
+}
+
+#img_button li {
+  display: inline;
+  cursor: pointer;
+  position: relative;
+  padding-left: 3px;
+  padding-right: 3px;
+  width: 10%;
+}
+
+
+/* 이미지 슬라이드 부분 css 종료*/
+
+
+/* Introduce 부분 css 시작*/
+
+div.Introduce {
+  outline: none;
+  width: 100%;
+  height: auto;
+  text-align: center;
+}
+
+div.Introduce table {
+  margin: 10px;
+  width: 1400px;
+  border: 2px solid black;
+  border-collapse: collapse;
+  display: inline-block;
+}
+
+div.Introduce table thead {
+  text-align: center;
+  width: 1px;
+}
+
+div.Introduce table tbody tr td {
+  border: none;
+  border-collapse: collapse;
+  border: 1px solid black;
+}
+
+.Introduce table tbody img {
+  width: 400px;
+}
+
+div.Introduce table tfoot {
+  text-align: center;
+}
+
+#div_chart {
+  width: 500px;
+}
+#Introduce_content{
+  text-align: left;
+}
+.TVN {
+  color: red;
+  font-family: times;
+  font-size: 40px;
+}
+
+.introduce_css {
+  font-weight: bold;
+  color: blue;
+  text-decoration: underline;
+}
+
+
+/* Introduce 부분 css 종료*/
+
+
+/* Gallery 부분 css 시작*/
+
+div.Gallery {
+  outline: none;
+  width: 100%;
+}
+
+div.Gallery div.Gallery_img_div {
+  width: 10px;
+  padding: 7px 7px;
+  margin: 10px;
+  width: 200px;
+  max-width: 250px;
+  border: 2px solid gray;
+  float: left;
+  position: relative;
+}
+
+div.Gallery img.Gallery_img {
+  width: 100%;
+  transition: 0.3s
+}
+
+div.Gallery div img.img_delete_button {
+  cursor: pointer;
+  width: 10%;
+  position: sticky;
+  top: 0px;
+  left: 0px;
+  position: absolute;
+}
+
+div.Gallery div.img_modal_button {
+  background-color: green;
+  width: 50%;
+  height: 20%;
+  position: absolute;
+  top: 40%;
+  left: 25%;
+  opacity: 0.9;
+  visibility: hidden;
+}
+
+div.Gallery div.img_modal_text {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  color: white;
+  font-size: 16px;
+  top: 30%;
+}
+
+
+/* Gallery 내의 modal창 css 시작*/
+
+#modal {
+  position: fixed;
+  top: 5%;
+  width: 100%;
+  height: 100%;
+  display: block;
+  text-align: center;
+  display: none;
+  z-index: 2;
+}
+
+#modal_background {
+  width: 100%;
+  height: 100%;
+  background-color: #000000;
+  opacity: 0.7;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  display: none;
+  z-index: 1;
+}
+
+#modal_img {
+  display: inline-block;
+  max-width: 90%;
+  max-height: 90%;
+  top: 10px;
+}
+
+.modal_button {
+  position: fixed;
+  width: 5%;
+  top: 50%;
+  cursor: pointer;
+  display: none;
+  z-index: 3;
+}
+
+#modal_left_button {
+  left: 1%;
+}
+
+#modal_right_button {
+  right: 1%;
+}
+
+
+/* Gallery 내의 modal창 css 종료*/
+
+
+/* Gallery 부분 css 종료*/
+
+
+/* Guestbook 부분 css 시작*/
+
+div.Guestbook {
+  outline: none;
+  width: 100%;
+  height: auto;
+  clear: both;
+}
+
+#GuestBook_table {
+  position: relative;
+  margin: 1%;
+  width: 98%;
+  text-align: center;
+  border-collapse: collapse;
+  word-break: break-all;
+  height: auto;
+}
+
+#GuestBook_table td {
+  border: 1px solid black;
+}
+
+#GuestBook_table thead {
+  border: 1px solid black;
+}
+
+#GuestBook_table .reply_table {
+  border: none;
+}
+
+#GuestBook_table .writed_reply {
+  background-color: #8C8C8C;
+  border: none;
+  text-align: left;
+  padding-left: 5%;
+}
+
+#GuestBook_table td.gray_color {
+  background-color: #D5D5D5;
+  width: 35%;
+  height: 50px;
+}
+
+#GuestBook_table input.reply {
+  float: right;
+}
+
+#Guest_writer {
+  osition: relative;
+  margin: 1%;
+  width: 98%;
+  border: 1px solid black;
+  text-align: center;
+  border-collapse: collapse;
+  word-break: break-all;
+  height: auto;
+}
+
+#Guest_writer td.gray_color {
+  background-color: #D5D5D5;
+  width: 8%;
+  border: 1px solid black;
+}
+
+#Guest_writer input.input_text {
+  width: 97%;
+  padding: 1%;
+}
+.OpenGraph_div{
+  border: 2px solid black;
+  background: #F6F6F6;
+  float:right;
+  display:inline-block;
+}
+
+
+/* Guestbook 부분 css 종료*/
+
+
+/*  End */
+
+
+/* Footer Start */
+
+footer {
+  display: block;
+  background-color: #5A5A5A;
+  text-align: center;
+  width: 100%;
+  height: 20%;
+  color: white;
+}
+
+#univercity {
+  color: #D1B2FF;
+}
+
+#student_ID {
+  color: #B2EBF4;
+  text-decoration: underline;
+}
+
+
+/* Footer End */
